@@ -6,14 +6,6 @@
 #include "ESPWebDAV.h"
 #include "sdControl.h"
 
-String IpAddress2String(const IPAddress& ipAddress)
-{
-  return String(ipAddress[0]) + String(".") +\
-  String(ipAddress[1]) + String(".") +\
-  String(ipAddress[2]) + String(".") +\
-  String(ipAddress[3])  ;
-}
-
 bool Network::start() {
   wifiConnected = false;
   wifiConnecting = true;
@@ -51,8 +43,6 @@ bool Network::start() {
   wifiConnected = true;
 
   config.save();
-  String sIp = IpAddress2String(WiFi.localIP());
-  config.save_ip(sIp.c_str());
 
   SERIAL_ECHOLN("Going to start DAV server");
   if(startDAVServer() < 0) return false;
